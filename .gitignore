@@ -50,6 +50,9 @@ typings/
 # Optional npm cache directory
 .npm
 
+#.env.example commit to repo
+.env
+
 # Optional eslint cache
 .eslintcache
 
