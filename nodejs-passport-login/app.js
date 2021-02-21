@@ -29,11 +29,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-  secret: '123',
+  store: new (require('connect-pg-simple')(seeeion))(),//usa process.env.DATABASE_URL internamente
+  secret: process.env.SESSION_SECRET,//configure um segredo seu aqui,
   resave: false,
   saveUninitialized: false,
-  cookie: { maxAge: 2 * 60 * 1000 }
+  cookie: { maxAge: 30 * 60 * 1000 }//30min
 }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/login', loginRouter);
 app.use('/users', authenticationMiddleware, usersRouter);
